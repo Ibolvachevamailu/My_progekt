@@ -1,16 +1,16 @@
 import numpy as np
 
-def cal_euclidean(array_a: np.ndarray, array_b: np.ndarray):
-        distance = np.sqrt(np.sum((a - b) ** 2))
+def cal_euclidean(array_a: np.ndarray, array_b: np.ndarray) -> float:
+        distance = np.sqrt(np.sum((array_a - array_b) ** 2))
         return distance
 
 
-def cal_manhattan(array_a: np.ndarray, array_b: np.ndarray):
-    distance = np.sum(np.abs(a)-np.abs(b))
+def cal_manhattan(array_a: np.ndarray, array_b: np.ndarray) -> float:
+    distance = np.sum(np.abs(array_a - array_b))
     return distance
 #
-def cal_cosine(array_a: np.ndarray, array_b: np.ndarray):
-    distance = np.dot(a, b)/(np.linalg.norm(a) * np.linalg.norm(b))
+def cal_cosine(array_a: np.ndarray, array_b: np.ndarray) -> float:
+    distance = np.dot(array_a, array_b)/(np.linalg.norm(array_a) * np.linalg.norm(array_b))
     return distance
 
 a = np.random.randint(-10, 10, size=10)
