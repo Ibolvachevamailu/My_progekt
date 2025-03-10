@@ -1,12 +1,13 @@
 import hw6.base
 from hw6 import exceptions
 import hw6.engine.Engine
-
+from hw6.exceptions import start
+from hw6.exceptions import MyException
 
 
 class Car(hw6.base.Vehicle):
 
-    def __init__(self, distance: int, weight = 1000, fuel = 0, fuel_consumption = 5, started_status = False):
+    def __init__(self, distance: int, weight = 1000, fuel = 1, fuel_consumption = 5, started_status = False):
         super().__init__(distance, weight, fuel, fuel_consumption, started_status)
 
 
@@ -16,7 +17,7 @@ class Car(hw6.base.Vehicle):
             self.started_status = 'started'
             return self.fuel
         else:
-            raise exceptions.LowFuelError
+            raise MyException
 
     def move(self):
         n = self.fuel_consumption * self.distance
