@@ -1,23 +1,20 @@
 import hw6.base
-from hw6 import exceptions
 import hw6.engine.Engine
-from hw6.exceptions import start
-from hw6.exceptions import MyException
+from hw6.exceptions import LowFuelError
+
 
 
 class Car(hw6.base.Vehicle):
 
-    def __init__(self, distance: int, weight = 1000, fuel = 1, fuel_consumption = 5, started_status = False):
+    def __init__(self, distance: int, weight = 1000, fuel = 1, fuel_consumption = 10, started_status = False):
         super().__init__(distance, weight, fuel, fuel_consumption, started_status)
 
-
-
     def start(self):
-        if self.started_status and self.fuel > 0:
-            self.started_status = 'started'
-            return self.fuel
-        else:
-            raise MyException
+        if not self.started_status:
+            if self.fuel > 0:
+                self.started_status = True
+            else:
+                raise LowFuelError("Недостаточно топлива для запуска двигателя.")
 
     def move(self):
         n = self.fuel_consumption * self.distance
@@ -26,7 +23,7 @@ class Car(hw6.base.Vehicle):
         else:
             self.fuel = n
             print(f'данные по топливу обновлены: {self.fuel}л')
-            raise exceptions.NotEnoughFuel
+            raise NotEnoughFuel
         print(f'топлива в итоге {self.fuel}л')
 
     def __str__(self):
@@ -35,7 +32,9 @@ class Car(hw6.base.Vehicle):
 
 car1 = Car(623)
 
-car1.start()
+
+# car1.start()
+# print(car1)
 # car1.move()
 # print(car)
 # print(hw6.engine.Engine.engine1.set_engine)

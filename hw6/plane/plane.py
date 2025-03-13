@@ -1,10 +1,9 @@
 import hw6.base
-from hw6 import exceptions
-
+from hw6.exceptions import LowFuelError, CargoOverload, NotEnoughFuel
 
 class Plane(hw6.base.Vehicle):
 
-    def __init__(self, cargo: int, max_cargo: int, distance: int, weight=1000, fuel=0, fuel_consumption=5, started_status=True):
+    def __init__(self, cargo: int, max_cargo: int, distance: int, weight = 1000, fuel = 0, fuel_consumption = 5, started_status = 0):
         super().__init__(distance, weight, fuel, fuel_consumption, started_status)
         self.cargo = cargo
         self.max_cargo = max_cargo
@@ -12,21 +11,21 @@ class Plane(hw6.base.Vehicle):
 
 
     def start(self):
-        if self.started_status and self.fuel > 0:
-            self.started_status = 'started'
-            return self.started_status
+        if not self.started_status:
+            if self.fuel > 0:
+                self.started_status = True
         else:
-            raise exceptions.LowFuelError
+            raise LowFuelError('мало топлива')
 
 
     def move(self):
         n = self.fuel_consumption * self.distance
         if n < self.fuel:
-            print(f'топлива достаточно - {self.fuel}л, расх на км {self.fuel_consumption}, всего км {self.distance} ')
+            print(f'топлива достаточно - {self.fuel}л, расход на км {self.fuel_consumption}, всего км {self.distance} ')
         else:
             self.fuel = n
             print(f'данные по топливу обновлены: {self.fuel}л')
-            raise exceptions.NotEnoughFuel
+            raise NotEnoughFuel('недостаточно топлива')
         print(f'топлива в итоге {self.fuel}л')
 
     def __str__(self):
@@ -40,7 +39,7 @@ class Plane(hw6.base.Vehicle):
             self.cargo = self.cargo + n
             print(f'перегруз на {n}кг')
             print(f'данные по грузу обновлены: {self.cargo}кг')
-            raise exceptions.CargoOverload
+            raise CargoOverload('Перегрузка груза')
 
 
     def remove_all_cargo(self):
@@ -49,9 +48,11 @@ class Plane(hw6.base.Vehicle):
         return previous_cargo
 
 plane = Plane(300, 233,100)
-# print(plane)
-# plane.start()
-plane.move()
+
+plane.start()
+
+# plane.move()
+print(plane)
 # plane.load_cargo()
 # plane.remove_all_cargo()
 

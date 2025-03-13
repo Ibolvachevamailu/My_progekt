@@ -1,5 +1,5 @@
 import traceback
-import hw6.base
+
 
 
 
@@ -22,21 +22,21 @@ class CargoOverload(MyException):
 #     else:
 #         raise NotEnoughFuel
 
-def start(self):
-    try:
-        var = start.fuel
-        if var <= 0:
-            raise LowFuelError
-        else:
-            raise MyException
-    except LowFuelError:
-        print(f'мало топлива')
-    except NotEnoughFuel:
-        print(f'недостаточно топлива')
-    except CargoOverload:
-        print(f'Перегрузка груза')
-    except Exception as e:#доб трейсбек
-        print(f'ошибка: {traceback.format_exc()}')
+
+    # try:
+    #     var = start.fuel
+    #     if var <= 0:
+    #         raise LowFuelError
+    #     else:
+    #         raise MyException
+    # except LowFuelError:
+    #     print(f'мало топлива')
+    # except NotEnoughFuel:
+    #     print(f'недостаточно топлива')
+    # except CargoOverload:
+    #     print(f'Перегрузка груза')
+    # except Exception as e:#доб трейсбек
+    #     print(f'ошибка: {traceback.format_exc()}')
 
 #
 # try:
