@@ -10,11 +10,14 @@ class Car(hw6.base.Vehicle):
         super().__init__(distance, weight, fuel, fuel_consumption, started_status)
 
     def start(self):
-        if not self.started_status:
-            if self.fuel > 0:
+        if self.fuel > 0:
+            if self.started_status:
                 self.started_status = True
             else:
-                raise LowFuelError("Недостаточно топлива для запуска двигателя.")
+                self.started_status = True
+        else:
+            raise LowFuelError(f"Недостаточно топлива для запуска двигателя")
+
 
     def move(self):
         n = self.fuel_consumption * self.distance
@@ -33,8 +36,8 @@ class Car(hw6.base.Vehicle):
 car1 = Car(623)
 
 
-# car1.start()
-# print(car1)
+car1.start()
+print(car1)
 # car1.move()
 # print(car)
 # print(hw6.engine.Engine.engine1.set_engine)
