@@ -27,6 +27,8 @@ def validate_age():
         except ValueError:
             print("Ошибка: пожалуйста, введите корректное целое число.")
 
+
+
 def main():
     users = {}
 
